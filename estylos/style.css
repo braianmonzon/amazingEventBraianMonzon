@@ -1,0 +1,43 @@
+
+.logo{
+    height: 100px;
+    width: 140px;
+}
+
+.container-fluid{
+    border: goldenrod solid 1px;
+    padding-left: 30px;
+}
+
+.nav-link{
+    color: goldenrod;
+    background-color: black;
+    border-radius: 10px;
+    margin: 10px;
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+}
+
+.redes{
+    width: 40px;
+    height: 40px;
+}
+
+.carousel-item{
+    width: 100%;
+  max-height: 200px;
+}
+
+.img-fluid{
+    width: 400px;
+    height: 350px;
+}
+
+.table,td{
+    border: 3px solid beige;
+    font-size: 20px; 
+    background-color: burlywood;
+}
+
+.card-img-topo{
+    height: 14.6rem;
+}
