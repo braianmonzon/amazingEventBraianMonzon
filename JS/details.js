@@ -195,13 +195,9 @@ const data = {
     };
 
     const eventCardsContainer = document.getElementById('event-cards');
-    const checkboxes = document.querySelectorAll('.categories input[type="checkbox"]');
     const searchInput = document.getElementById('searchInput');
     
-    // Agrega event listeners a los checkboxes y al campo de búsqueda
-    checkboxes.forEach(checkbox => {
-      checkbox.addEventListener('change', aplicarFiltros);
-    });
+    // Agrega event listener al campo de búsqueda
     searchInput.addEventListener('input', aplicarFiltros);
     
     // Función para crear y agregar las tarjetas de eventos
@@ -220,41 +216,23 @@ const data = {
         const cardContent = document.createElement('div');
         cardContent.classList.add('card-content');
     
-        const name = document.createElement('h3');
-        name.textContent = event.name;
+        const title = document.createElement('h3');
+        title.textContent = event.name;
     
-        const date = document.createElement('p');
-        date.textContent = `Date: ${event.date}`;
+        const description = document.createElement('p');
+        description.textContent = event.description;
     
-        const category = document.createElement('p');
-        category.textContent = `Category: ${event.category}`;
+        const detailsLink = document.createElement('a');
+        detailsLink.href = `./pages/details.html?eventId=${event.id}`;
+        detailsLink.classList.add('details-link');
+        detailsLink.textContent = 'Details';
+        detailsLink.addEventListener('click', () => {
+          window.location.href = detailsLink.href;
+        });
     
-        const place = document.createElement('p');
-        place.textContent = `Place: ${event.place}`;
-    
-        const capacity = document.createElement('p');
-        capacity.textContent = `Capacity: ${event.capacity}`;
-    
-        const assistance = document.createElement('p');
-        assistance.textContent = `Assistance: ${event.assistance}`;
-    
-        const price = document.createElement('p');
-        price.textContent = `Price: $${event.price}`;
-    
-        const anchor = document.createElement('a');
-        anchor.href = `./pages/details.html?event=${event.id}`;
-        anchor.classList.add('details-link');
-        anchor.dataset.eventId = event.id;
-        anchor.textContent = 'Details';
-    
-        cardContent.appendChild(name);
-        cardContent.appendChild(date);
-        cardContent.appendChild(category);
-        cardContent.appendChild(place);
-        cardContent.appendChild(capacity);
-        cardContent.appendChild(assistance);
-        cardContent.appendChild(price);
-        cardContent.appendChild(anchor);
+        cardContent.appendChild(title);
+        cardContent.appendChild(description);
+        cardContent.appendChild(detailsLink);
     
         card.appendChild(img);
         card.appendChild(cardContent);
@@ -264,36 +242,12 @@ const data = {
     }
     
     function aplicarFiltros() {
-      const filtroTexto = document.getElementById('searchInput').value.toLowerCase();
-      const filtrosCheckbox = Array.from(checkboxes)
-        .filter(checkbox => checkbox.checked)
-        .map(checkbox => checkbox.id);
-    
-      let eventosFiltrados = data.events;
-    
-      // Filtrar por texto
-      eventosFiltrados = filtrarPorTexto(eventosFiltrados, filtroTexto);
-    
-      // Filtrar por categoría
-      if (filtrosCheckbox.length > 0) {
-        eventosFiltrados = eventosFiltrados.filter(event => filtrosCheckbox.includes(event.category));
-      }
-    
-      crearTarjetasDeEventos(eventosFiltrados);
+      const searchText = searchInput.value.toLowerCase();
+      const filteredEvents = data.events.filter(event => {
+        return event.name.toLowerCase().includes(searchText);
+      });
+      crearTarjetasDeEventos(filteredEvents);
     }
-    
-    function filtrarPorTexto(array, texto) {
-      if (!texto) return array;
-      return array.filter(event => event.name.toLowerCase().includes(texto) || event.description.toLowerCase().includes(texto));
-    }
-    
-    // Agrega un event listener a los enlaces "Details"
-    eventCardsContainer.addEventListener('click', (event) => {
-      if (event.target.classList.contains('details-link')) {
-        const eventId = event.target.dataset.eventId;
-        window.location.href = `./pages/details.html?event=${eventId}`;
-      }
-    });
     
     // Llama a la función para crear las tarjetas de eventos inicialmente
     crearTarjetasDeEventos(data.events);

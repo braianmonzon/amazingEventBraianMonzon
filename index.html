@@ -117,40 +117,28 @@
         
 
         <div class="m-3 d-flex justify-content-end">
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-            <label class="form-check-label" for="inlineCheckbox1">Food Fair</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-            <label class="form-check-label" for="inlineCheckbox2">Museum</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
-            <label class="form-check-label" for="inlineCheckbox2">Costume Party</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option4">
-            <label class="form-check-label" for="inlineCheckbox2">Music Concert</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option5">
-            <label class="form-check-label" for="inlineCheckbox2">Race</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option5">
-            <label class="form-check-label" for="inlineCheckbox2">Book Exchange</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox7" value="option5">
-            <label class="form-check-label" for="inlineCheckbox2">Let's go to the cinema</label>
-          </div>
 
-          <form action="/search" method="GET" class="search-form search-form-inline">
-            <input type="text" name="q" placeholder="Buscar..." class="search-input">
+          <div class="filter-container">
+            
+            <div class="categories">
+
+              <label><input type="checkbox" onclick="checkbox()" id="Food Fair"> Food </label>
+              <label><input type="checkbox" onclick="checkbox()" id="Museum"> Museum </label>
+              <label><input type="checkbox" onclick="checkbox()" id="Costume Party"> Party </label>
+              <label><input type="checkbox" onclick="checkbox()" id="Music Concert"> Concert </label>
+              <label><input type="checkbox" onclick="checkbox()" id="Race"> Race </label>
+              <label><input type="checkbox" onclick="checkbox()" id="Book Exchange"> Book </label>
+              <label><input type="checkbox" onclick="checkbox()" id="Cinema"> Cinema </label>
+
+              <input type="text" id="searchInput" onclick="buscar()" placeholder="Buscar..." />
             <button type="submit" class="search-button">Buscar</button>
-          </form>
-  </div>
+
+            </div>
+          </div>
+          
+      
+
+        </div>
 
   <div class="container-fluid d-flex flex-wrap"></div>
         

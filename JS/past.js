@@ -100,59 +100,157 @@ const data = {
     };
 
     const eventCardsContainer = document.getElementById('event-cards');
-
-for (let i = 0; i < data.events.length; i++) {
-  const event = data.events[i];
-  const card = document.createElement('div');
-  card.classList.add('card');
-  card.id = `event-${i}`;
-
-  const img = document.createElement('img');
-  img.src = event.image;
-  img.alt = event.name;
-
-  const cardContent = document.createElement('div');
-  cardContent.classList.add('card-content');
-
-  const name = document.createElement('h3');
-  name.textContent = event.name;
-
-  const date = document.createElement('p');
-  date.textContent = `Date: ${event.date}`;
-
-  const description = document.createElement('p');
-  description.textContent = event.description;
-
-  const category = document.createElement('p');
-  category.textContent = `Category: ${event.category}`;
-
-  const place = document.createElement('p');
-  place.textContent = `Place: ${event.place}`;
-
-  const capacity = document.createElement('p');
-  capacity.textContent = `Capacity: ${event.capacity}`;
-
-  const assistance = document.createElement('p');
-  assistance.textContent = `Assistance: ${event.assistance}`;
-
-  const price = document.createElement('p');
-  price.textContent = `Price: $${event.price}`;
-
-  const anchor = document.createElement('a'); 
-  anchor.href = `./details.html?event=${i}`; 
-  anchor.textContent = 'Details'; 
-
-  cardContent.appendChild(name);
-  cardContent.appendChild(date);
-  cardContent.appendChild(category);
-  cardContent.appendChild(place);
-  cardContent.appendChild(capacity);
-  cardContent.appendChild(assistance);
-  cardContent.appendChild(price);
-  cardContent.appendChild(anchor); 
-
-  card.appendChild(img);
-  card.appendChild(cardContent);
-
-  eventCardsContainer.appendChild(card);
-}
+    const checkboxes = document.querySelectorAll('.categories input[type="checkbox"]');
+    const searchInput = document.getElementById('searchInput');
+    
+    // Agrega event listeners a los checkboxes y al campo de búsqueda
+    checkboxes.forEach(checkbox => {
+      checkbox.addEventListener('change', aplicarFiltros);
+    });
+    searchInput.addEventListener('input', aplicarFiltros);
+    
+    for (let i = 0; i < data.events.length; i++) {
+      const event = data.events[i];
+      const card = document.createElement('div');
+      card.classList.add('card');
+      card.id = `event-${i}`;
+    
+      const img = document.createElement('img');
+      img.src = event.image;
+      img.alt = event.name;
+    
+      const cardContent = document.createElement('div');
+      cardContent.classList.add('card-content');
+    
+      const name = document.createElement('h3');
+      name.textContent = event.name;
+    
+      const date = document.createElement('p');
+      date.textContent = `Date: ${event.date}`;
+    
+      const description = document.createElement('p');
+      description.textContent = event.description;
+    
+      const category = document.createElement('p');
+      category.textContent = `Category: ${event.category}`;
+    
+      const place = document.createElement('p');
+      place.textContent = `Place: ${event.place}`;
+    
+      const capacity = document.createElement('p');
+      capacity.textContent = `Capacity: ${event.capacity}`;
+    
+      const assistance = document.createElement('p');
+      assistance.textContent = `Assistance: ${event.assistance}`;
+    
+      const price = document.createElement('p');
+      price.textContent = `Price: $${event.price}`;
+    
+      const anchor = document.createElement('a');
+      anchor.href = `../pages/details.html?event=${i}`;
+      anchor.textContent = 'Details';
+    
+      cardContent.appendChild(name);
+      cardContent.appendChild(date);
+      cardContent.appendChild(category);
+      cardContent.appendChild(place);
+      cardContent.appendChild(capacity);
+      cardContent.appendChild(assistance);
+      cardContent.appendChild(price);
+      cardContent.appendChild(anchor); 
+    
+      card.appendChild(img);
+      card.appendChild(cardContent);
+    
+      eventCardsContainer.appendChild(card);
+    }
+    
+    function aplicarFiltros() {
+      const filtroTexto = document.getElementById('searchInput').value.toLowerCase();
+      const filtrosCheckbox = Array.from(checkboxes)
+        .filter(checkbox => checkbox.checked)
+        .map(checkbox => checkbox.id);
+    
+      let eventosFiltrados = data.events;
+    
+      // Filtrar por texto
+      eventosFiltrados = filtrarPorTexto(eventosFiltrados, filtroTexto);
+    
+      // Filtrar por categoría
+      if (filtrosCheckbox.length > 0) {
+        eventosFiltrados = eventosFiltrados.filter(event => filtrosCheckbox.includes(event.category));
+      }
+    
+      mostrarCards(eventosFiltrados);
+    }
+    
+    function mostrarCards(eventos) {
+      eventCardsContainer.innerHTML = '';
+    
+      if (eventos.length === 0) {
+        const mensajeSinNada = document.createElement('div');
+        mensajeSinNada.textContent = 'No se encontraron eventos.';
+        mensajeSinNada.style.textAlign = 'center';
+        eventCardsContainer.appendChild(mensajeSinNada);
+      } else {
+        eventos.forEach(event => {
+          const card = document.createElement('div');
+          card.classList.add('card');
+          card.id = `event-${event.id}`;
+    
+          const img = document.createElement('img');
+          img.src = event.image;
+          img.alt = event.name;
+    
+          const cardContent = document.createElement('div');
+          cardContent.classList.add('card-content');
+    
+          const name = document.createElement('h3');
+          name.textContent = event.name;
+    
+          const date = document.createElement('p');
+          date.textContent = `Date: ${event.date}`;
+    
+          const description = document.createElement('p');
+          description.textContent = event.description;
+    
+          const category = document.createElement('p');
+          category.textContent = `Category: ${event.category}`;
+    
+          const place = document.createElement('p');
+          place.textContent = `Place: ${event.place}`;
+    
+          const capacity = document.createElement('p');
+          capacity.textContent = `Capacity: ${event.capacity}`;
+    
+          const assistance = document.createElement('p');
+          assistance.textContent = `Assistance: ${event.assistance}`;
+    
+          const price = document.createElement('p');
+          price.textContent = `Price: $${event.price}`;
+    
+          const anchor = document.createElement('a');
+          anchor.href = `./pages/details.html?event=${event.id}`;
+          anchor.textContent = 'Details';
+    
+          cardContent.appendChild(name);
+          cardContent.appendChild(date);
+          cardContent.appendChild(category);
+          cardContent.appendChild(place);
+          cardContent.appendChild(capacity);
+          cardContent.appendChild(assistance);
+          cardContent.appendChild(price);
+          cardContent.appendChild(anchor); 
+    
+          card.appendChild(img);
+          card.appendChild(cardContent);
+    
+          eventCardsContainer.appendChild(card);
+        });
+      }
+    }
+    
+    function filtrarPorTexto(array, texto) {
+      if (!texto) return array;
+      return array.filter(event => event.name.toLowerCase().includes(texto) || event.description.toLowerCase().includes(texto));
+    }
