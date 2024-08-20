@@ -223,36 +223,31 @@ const data = {
         const name = document.createElement('h3');
         name.textContent = event.name;
     
-        const date = document.createElement('p');
-        date.textContent = `Date: ${event.date}`;
-    
-        const category = document.createElement('p');
-        category.textContent = `Category: ${event.category}`;
-    
-        const place = document.createElement('p');
-        place.textContent = `Place: ${event.place}`;
-    
-        const capacity = document.createElement('p');
-        capacity.textContent = `Capacity: ${event.capacity}`;
-    
-        const assistance = document.createElement('p');
-        assistance.textContent = `Assistance: ${event.assistance}`;
+        const description = document.createElement('p');
+        description.textContent = `Descripción: ${event.description}`;
     
         const price = document.createElement('p');
         price.textContent = `Price: $${event.price}`;
     
         const anchor = document.createElement('a');
-        anchor.href = `./pages/details.html?event=${event.id}`;
+        anchor.href = `./pages/details.html?event=${event._id}`;
         anchor.classList.add('details-link');
         anchor.dataset.eventId = event.id;
+    
+        // Agrega los filtros como parámetros en la URL
+        const filtroTexto = searchInput.value;
+        const filtrosCheckbox = Array.from(checkboxes)
+          .filter(checkbox => checkbox.checked)
+          .map(checkbox => checkbox.id);
+        anchor.href += `&search=${encodeURIComponent(filtroTexto)}`;
+        filtrosCheckbox.forEach(filtro => {
+          anchor.href += `&category=${encodeURIComponent(filtro)}`;
+        });
+    
         anchor.textContent = 'Details';
     
         cardContent.appendChild(name);
-        cardContent.appendChild(date);
-        cardContent.appendChild(category);
-        cardContent.appendChild(place);
-        cardContent.appendChild(capacity);
-        cardContent.appendChild(assistance);
+        cardContent.appendChild(description);
         cardContent.appendChild(price);
         cardContent.appendChild(anchor);
     
@@ -287,13 +282,9 @@ const data = {
       return array.filter(event => event.name.toLowerCase().includes(texto) || event.description.toLowerCase().includes(texto));
     }
     
-    // Agrega un event listener a los enlaces "Details"
-    eventCardsContainer.addEventListener('click', (event) => {
-      if (event.target.classList.contains('details-link')) {
-        const eventId = event.target.dataset.eventId;
-        window.location.href = `./pages/details.html?event=${eventId}`;
-      }
-    });
+    
     
     // Llama a la función para crear las tarjetas de eventos inicialmente
     crearTarjetasDeEventos(data.events);
+
+    
