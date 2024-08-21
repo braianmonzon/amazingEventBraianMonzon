@@ -16,7 +16,9 @@
     border-radius: 5px 5px 0 0;
   }
   .card-content {
-    padding: 5px;
+    padding: 2px;
+    display: flex;
+    flex-direction: column;
   }
 
   .logo{
@@ -62,3 +64,13 @@
 .card-img-topo{
     height: 14.6rem;
 }
+
+ @media (max-width: 768px) {
+  #event-cards .card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 10px auto;
+  }
+}
+
