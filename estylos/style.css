@@ -23,7 +23,7 @@
 
   .logo{
     height: 75px;
-    width: 110px;
+    width: 280px;
 }
 
 .container-fluid{
@@ -74,3 +74,106 @@
   }
 }
 
+.card88 {
+  border-radius: 15px;
+  overflow: hidden;
+  height: 400px; 
+  width: 800px; 
+  display: inline-block;
+  border: 2px solid white;
+  color: black;
+  margin: 20px;
+}
+
+.card88 .card-body {
+  margin: 15px; /* Margin para el contenido de la tarjeta */
+}
+
+.card88 .card-title {
+  font-weight: bold; /* Texto en negrita */
+}
+.card88 img {
+  object-fit: cover;
+  height: 100%; 
+  width: 100%; 
+}
+.card88-body {
+  background-color: #f8f9fa;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%; 
+}
+
+.card88-content {
+padding: 2px;
+display: flex;
+flex-direction: column;
+}
+
+
+.tabla {
+  width: 100%;
+  margin-bottom: 1.5rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.tabla th {
+  background-color: #021120;
+  color: #ffffff;
+  text-align: center;
+}
+.tabla td {
+  text-align: center;
+  background-color: #ffffff;
+}
+.tabla tr:nth-child(even) td {
+  background-color: #e9ecef;
+}
+.tabla tr:hover {
+  background-color: #f1f1f1;
+}
+
+body {
+  background-color: #f8f9fa;
+  font-family: 'Arial', sans-serif;
+}
+header {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.navbar-brand img {
+  max-width: 150px; /* Ajusta el tamaño del logo */
+}
+.carousel-item img {
+  filter: brightness(70%);
+}
+.carousel-caption h5 {
+  font-size: 2rem;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+}
+.filter-container {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.categories label {
+  font-weight: 500;
+  cursor: pointer;
+}
+#event-cards {
+  margin: 2rem 0;
+}
+.footer-buttons {
+  padding: 1rem;
+  justify-content: center;
+}
+.footer-buttons img {
+  width: 30px;
+  height: 30px;
+}
+.footer-buttons h5 {
+  margin-top: 0.5rem;
+  font-weight: 400;
+}
